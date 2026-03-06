@@ -18,17 +18,15 @@ This ensures consistent behavior across machines without touching system Python.
 
 ```text
 password-validator/ 
-    |
-    ├── src/
+    | 
+    ├── src/.
     |    └── password_validator/
-    |           |
-    |           ├── __init__.py     
-    |           ├── cli.py      
-    |           └── validator.py      
+    |            ├── __init__.py        # Public API surface
+    |            ├── cli.py     # Optional interface
+    |            └── validator.py       # Core logic
     ├── tests/
-    |   |
-    |   └── test_validator.py       
-    ├── pyproject.toml
+    |    └── test_validator.py      # Test suite
+    ├── pyproject.toml   
     ├── README.md
     ├── LICENSE.md
     └──.gitignore
@@ -41,14 +39,14 @@ This project is designed to be run with `uv` - a fast Python package and project
 
 1. Install `uv` (if not already)
 
-Windows PowerShell:
+Windows PowerShell
 ``` PowerShell
 pip install uv
 ```
 or see [official installation guide](https://docs.astra.sh/uv/getting-started/installation/)
 
-Verify:
-```PowerShell
+Verify Installation:
+``` PowerShell
 uv --version
 ```
 
@@ -61,40 +59,53 @@ cd password-validator
 
 3. Setup the project environment
 
-Create and synchronize the isolated Python environments
+Create and synchronize the isolated Python environment:
 ``` bash
-uv lock
-uv sync
+uv lock # generates uv.lock file 
+uv sync # installs Python and dependencies in isolation
 ```
+
 
 ## Running the CLI
 
-There are two ways to interactively validate a password:
+There are two ways to run the CLI.  
+From the project root:
 
-**Option 1 (Development / Debugging)**
+#### Option 1 (Development / Debugging)
 ``` bash
 uv run python -m password_validator.cli
 ```
 
-**Option 2 (Intalled / User-Friendly)**
+#### Option 2 (Installed / User-Friendly):
 ``` bash
 uv run validate-password
 ```
 
-You will be prompted to enter a password.  
-The program will:
-- Display all violated rules at once
-- Continue prompting until a valid password is entered
-- Exit gracefully on Ctrl+C or input interruption
+You will be prompted to enter your password:
+- If the password is invalid, errors will be displayed
+- Repeat until a valid password is created
+- Or exit gracefully on Ctrl+C or input interruption
 
-*Option 1 is safer for devs. Option 2 is shorter and works afer environment setup.*
+Use Option 1 while developing or debugging, and Option 2 once the environment is synced for general usage
+
 
 ## Running Tests
 
-To execute the full test suite:
-``` bash 
-uv run pytest
+All tests are located in the `tests/` folder and are written using `pytest`.  
+From the project root:
+
+#### Option 1 - Run all tests
+``` bash
+uv run pytest 
 ```
+
+#### Option 2 - Run a specific test function
+```bash
+uv run pytest tests/test_validator.py::test_valid_password
+```
+
+**NOTE**: `uv run pytest` works because `pytest` is installed in the uv environment. 
+Do not run `python test_validator.py` direclty - the test framework will not discover functions.
 
 The test suite verifies:
 - Length boundaries (min and max)
@@ -110,8 +121,10 @@ The test suite verifies:
 You can use the validator directly in Python code:
 ``` python
 from password_validator import PasswordValidator
+
 validator = PasswordValidator(min_length=12, allow_spaces=True) 
 errors = validator.validate("My Password1!") 
+
 if not errors: 
     print("Password is valid!") 
 else: 
@@ -119,10 +132,15 @@ else:
 ```
 
 #### Configuration Options
-`PasswordValidator` supports:
-- min_length and max_length (The minimum and maximum required length of characters)
-- special_chars="!@#$%^&*" (Allowed special characters)
-- allow_spaces=False (Whether spaces are permitted)
+
+```  python
+validator = PasswordValidator(
+    min_length=12,
+    max_length=32,
+    special_chars="!@#$%",
+    allow_spaces=True
+) 
+```
 
 ---
 ## Development Notes
@@ -130,15 +148,28 @@ else:
 - Use uv run pytest to run all tests
 - CLI uses getpass — passwords are not echoed
 - Validator logic is pure library, no automatic printing
-- Ready for future features (v0.2.0: configurable rules, dictionary check, entropy and repeat sequences detection)
+- Ready for future features (v0.2.0: entropy detection)
+
+---
+## Version History
+
+Version 0.1.0
+- Initial public release
+
+Version 0.1.1
+- Development environment improvements and project documentation
+
+Current Version: Alpha (v0.1.1)
+
+This version improves infrastructure and packaging but does not change core validation logic.
 
 ---
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
 
 ---
-## Development Status
+## Author 
 
-Alpha (v0.1.1)
+Botshelo Mere
 
-This version improves infrastructure and packaging but does not change core validation logic.
+Github: [https://github.com/botshelo-mere](https://github.com/botshelo-mere)

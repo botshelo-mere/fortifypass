@@ -5,6 +5,7 @@ __pycache__/
 *.so
 .Python
 
+<<<<<<< Updated upstream
 # Python version files
 .python-version
 
@@ -14,6 +15,14 @@ venv/
 ENV/
 env/
 
+=======
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+>>>>>>> Stashed changes
 # uv
 uv.lock
 
