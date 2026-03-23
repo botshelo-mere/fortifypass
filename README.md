@@ -1,5 +1,6 @@
-# password-validator
+# FortifyPass Validator
 
+[![PyPI version](https://img.shields.io/badge/pypi-v0.2.0-blue.svg)](https://pypi.org/project/fortifypass-validator/0.2.0/)
 [![Python Version](https://img.shields.io/badge/python-3.9+-blue.svg)](https://python.org)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE.md)
 [![Development Status](https://img.shields.io/badge/status-beta-yellow.svg)](https://github.com/botshelo-mere/password-validator)
@@ -38,7 +39,7 @@ uv sync
 ### Using pip
 
 ```bash
-pip install password-validator
+pip install fortifypass-validator
 ```
 
 ### Dev / Testing
@@ -113,8 +114,8 @@ valid, errors = validator.validate("Admin123!")
 
 | Parameter | Type | Default | Description |
 |---|---|---|---|
-| `min_length` | `int` | `12` | Minimum password length (must be ≥ 1) |
-| `max_length` | `int` | `64` | Maximum password length (must be ≥ `min_length`) |
+| `min_length` | `int` | `12` | Minimum password length (must be >= 12) |
+| `max_length` | `int` | `64` | Maximum password length (must be <= `min_length`) |
 | `require_uppercase` | `bool` | `True` | Require at least one uppercase letter |
 | `require_lowercase` | `bool` | `True` | Require at least one lowercase letter |
 | `require_digit` | `bool` | `True` | Require at least one digit |
@@ -173,7 +174,7 @@ uv run password-validator
 ```
 
 ```
-Password Validator v0.2.0 (zxcvbn powered)
+FortifyPass-Validator v0.2.0 (zxcvbn powered)
 Type .exit() to quit
 
 Enter password: ········

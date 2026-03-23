@@ -19,7 +19,7 @@ def main():
         sys.exit(0 if result["score"] >= 3 else 1)
 
     # Interactive mode
-    print(Fore.CYAN + Style.BRIGHT + "Password Validator v0.2.0 (zxcvbn powered)")
+    print(Fore.CYAN + Style.BRIGHT + "FortifyPass-Validator v0.2.0 (zxcvbn powered)")
     print(Fore.CYAN + "Type .exit() to quit\n")
 
     while True:

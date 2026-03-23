@@ -1,5 +1,5 @@
 [project]
-name = "password-validator"
+name = "fortifypass-validator"
 version = "0.2.0"
 description = "A modern password validation library powered by zxcvbn with policy enforcement and CLI support."
 readme = "README.md"
