@@ -28,71 +28,23 @@ FortifyPass doesn't just validate - it forces strong passwords and explains why:
 
 ## Quick Demo
 
-``` bash
-fortifypass
-```
+### Interactive CLI Mode
 
-``` bash
-FortifyPass version 0.2.1      
-Type .exit() to quit      
-      
-Enter password: ··············      
-✗ Does not meet policy requirements      
-  • Policy requirement: add at least one special character      
-✗ Too weak against common attacks      
-      
-Score: 0/4      
-Strength: Very Weak      
-      
-Feedback:      
-  • Sequences like "abc" or "6543" are easy to guess.      
-  • Avoid sequences.      
-      
-------------------------------------------------------------       
-      
-Enter password: ·················      
-✗ Too weak against common attacks      
-      
-Score: 2/4      
-Strength: Moderate      
-      
-Feedback:      
-  • This is similar to a commonly used password.      
-  • Add another word or two. Uncommon words are better.      
-  • Capitalization doesn't help very much.      
-  • Predictable substitutions like '@' instead of 'a' don't help very much.      
-      
-------------------------------------------------------------      
-      
-Enter password: ······························      
-✓ Strong against common attacks      
-      
-Score: 4/4      
-Strength: Very Strong      
-      
-------------------------------------------------------------
-      
-Enter password: ·······     
-Goodbye.
-```
+Run `fortifypass` directly in your terminal for real-time feedback
+
+![Interactive CLI Demo](assets/demo-cli-interactive.png)
 
 ### Non-Interactive / Pipe mode
 
-``` bash
-echo "Str0ngP@ssw0rd!" | fortifypass
-```
+For automated workflows, pipe passwords directly. Output is JSON with validation results
 
-``` json
-{
-  "valid": true,
-  "policy_passed": true,
-  "strength_passed": true,
-  "errors": [],
-  "score": 4,
-  "label": "Very Strong",
-  "feedback": []
-}
-```
+![Pipe Mode Demo](assets/demo-pipe-usage1.png)
+
+Validate passwords programmatically in scripts and pipelines
+
+![Pipe Mode Demo](assets/demo-pipe-usage2.png)
+
+---
 
 ## Installation
 
